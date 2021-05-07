@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import MeetupsList from "../components/meetups/meetups-list/MeetupsList";
 
 const DUMMY_DATA = [
@@ -22,6 +23,63 @@ const DUMMY_DATA = [
 ];
 
 function AllMeetupsPage() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [meetups, setMeetups] = useState([]);
+
+    // if we write the code outside useEffect then the component will try to render infinitely;
+    // as everytime the state changes isLoading flag starts with false;
+    useEffect(() => {
+        setIsLoading(true);
+
+        fetch('https://react-getting-started-45c95-default-rtdb.firebaseio.com/meetups.json')
+            .then(
+                (response) => {
+                    // console.log('>> response', response);
+                    // console.log('>> response.json()', response.json());
+
+                    return response.json();
+                }
+            ).then((data) => {
+                // console.log('>> data', data);
+                // map the response object to array
+
+                const loadedMeetups = [];
+
+                for (const key in data) {
+                    const m = {
+                        id: key,
+                        ...data[key]
+                    }
+
+                    loadedMeetups.push(m);
+                }
+
+                console.log('>> loadedMeetups', loadedMeetups);
+                setIsLoading(false);
+                setMeetups(loadedMeetups);
+            })
+    }, []);
+
+    if (isLoading) {
+        return (
+            <section>
+                {/* <p>Loading...</p> */}
+                <div className="text-center">
+                    <div className="spinner-border text-primary" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    if (meetups.length === 0)
+        return (
+            <section>
+                <p>No meetups to show</p>
+            </section>
+        )
+
     return (
         <section>
             <h1>All Meetups</h1>
@@ -33,7 +91,7 @@ function AllMeetupsPage() {
                 })
             }
             </ul> */}
-            <MeetupsList meetups={DUMMY_DATA} />
+            <MeetupsList meetups={meetups} />
         </section>
     )
 }

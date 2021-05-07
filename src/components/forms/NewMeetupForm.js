@@ -17,9 +17,12 @@ function NewMeetupForm(props) {
         const description = descriptionInputRef.current.value;
 
         const meetupData = {title, image, address, description};
-        console.log('>> submit',meetupData);
+        // console.log('>> submit',meetupData);
+        
+        props.onAddMeetup(meetupData);
     }
 
+    console.log('>> imgInputRef',imgInputRef);
     return (
         <Card>
             <form className={classes.form} onSubmit={handleSubmit} >
@@ -31,6 +34,12 @@ function NewMeetupForm(props) {
                     <label htmlFor='img'>Meetup Image</label>
                     <input type='url' id='img' ref={imgInputRef} required />
                 </div>
+
+                {/*
+                <img src={imgInputRef.current && imgInputRef.current.value ? imgInputRef.current.value : ''}
+                alt=''
+                height='200' width='200'/>
+                 */}
                 <div className={classes.control}>
                     <label htmlFor='address'>Address</label>
                     <input type='text' id='address' ref={addressInputRef} required />

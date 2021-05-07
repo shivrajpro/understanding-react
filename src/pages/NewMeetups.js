@@ -1,7 +1,8 @@
 import NewMeetupForm from "../components/forms/NewMeetupForm";
 
 function NewMeetupsPage() {
-    return (<div>In NewMeetupsPage
+    return (<div>
+        <h1>Add New Meetup</h1>
 
         <NewMeetupForm/>
     </div>)

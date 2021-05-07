@@ -12,7 +12,8 @@ function FavoritesPage() {
 
 
     return (<div>
-        <h3>Your Favorite Meetups will appear here</h3>
+        <h3>Your Favorite Meetups</h3>
+        {/* we can also store JSX in a normal JS variable depending on the condition */}
         {favoriteMeetups.length === 0 && <p>No Favorite Meetups added yet</p>}
         <MeetupsList meetups={favoriteMeetups} />
     </div>)

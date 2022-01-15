@@ -43,7 +43,7 @@ function AllMeetupsPage() {
                 // console.log('>> data', data);
                 // map the response object to array
 
-                const loadedMeetups = [];
+                let loadedMeetups = [];
 
                 for (const key in data) {
                     const m = {
@@ -55,6 +55,7 @@ function AllMeetupsPage() {
                 }
 
                 console.log('>> loadedMeetups', loadedMeetups);
+                loadedMeetups = DUMMY_DATA;
                 setIsLoading(false);
                 setMeetups(loadedMeetups);
             })

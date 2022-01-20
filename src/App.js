@@ -1,6 +1,6 @@
 // import ExpenseItem from "./components/ExpenseItem";
-import ExpenseList from "./components/ExpenseList";
-
+import ExpenseList from "./components/expenses/ExpenseList";
+// import React from "React";
 function App() {
   const expenses = [
     {
@@ -24,8 +24,19 @@ function App() {
     },
   ];
 
+  // in earlier version, we had to import React from "React" in every component that uses JSX
+  // Alternative to JSX
+
+
+  // return React.createElement(
+  //   "div",
+  //   {},
+  //   React.createElement("h2", {}, "Lets get started!"),
+  //   React.createElement(ExpenseList, { expenses })
+  // );
   return (
     <div>
+      <h2>Lets get started!</h2>
       <ExpenseList expenses={expenses} />
     </div>
   );
